@@ -1,1 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>Birthday Countdown - Adly 🎂</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+
+    .container {
+      width: 92%;
+      max-width: 430px;
+      z-index: 2;
+    }
+
+    .card {
+      padding: 35px 22px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.3);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+
+    .cake {
+      font-size: 70px;
+      animation: floating 2s infinite ease-in-out;
+    }
+
+    h1 {
+      margin-top: 10px;
+      font-size: 32px;
+    }
+
+    .name {
+      font-size: 42px;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .date {
+      margin-top: 10px;
+      font-size: 16px;
+      opacity: .9;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 25px;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.2);
+      border-radius: 15px;
+      padding: 12px 5px;
+    }
+
+    .number {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 11px;
+      margin-top: 4px;
+      opacity: .9;
+    }
+
+    .message {
+      margin-top: 25px;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    #birthday {
+      display: none;
+    }
+
+    #birthday h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      margin-top: 25px;
+      padding: 13px 25px;
+      border: none;
+      border-radius: 50px;
+      background: white;
+      color: #764ba2;
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .heart {
+      position: fixed;
+      top: -30px;
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes floating {
+      0%,100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="card">
+
+      <div class="cake">🎂</div>
+
+      <h1>Birthday Countdown</h1>
+
+      <div class="name">ADLY</div>
+
+      <div class="date">
+        🎉 22 Oktober 2026 🎉
+      </div>
+
+      <!-- COUNTDOWN -->
+      <div id="countdown" class="countdown">
+
+        <div class="box">
+          <div id="days" class="number">00</div>
+          <div class="label">HARI</div>
+        </div>
+
+        <div class="box">
+          <div id="hours" class="number">00</div>
+          <div class="label">JAM</div>
+        </div>
+
+        <div class="box">
+          <div id="minutes" class="number">00</div>
+          <div class="label">MENIT</div>
+        </div>
+
+        <div class="box">
+          <div id="seconds" class="number">00</div>
+          <div class="label">DETIK</div>
+        </div>
+
+      </div>
+
+      <p class="message">
+        Menuju hari spesial Adly yang ke-19! 🥳
+        <br>
+        Tinggal menghitung hari...
+        <br>
+        Semoga semakin dekat dengan
+        semua impian dan harapanmu. ✨
+      </p>
+
+
+      <!-- UCAPAN SAAT ULTAH -->
+      <div id="birthday">
+
+        <h2>🎉 HAPPY BIRTHDAY! 🎉</h2>
+
+        <div style="font-size:60px;">
+          🎂🎁🥳
+        </div>
+
+        <p class="message">
+          Selamat ulang tahun yang ke-19,
+          <b>Adly!</b> ❤️
+          <br><br>
+
+          Semoga di usia yang baru ini,
+          selalu diberikan kesehatan,
+          kebahagiaan, rezeki yang lancar,
+          dan kemudahan dalam setiap langkah.
+          <br><br>
+
+          Semoga semua impian yang sedang
+          diperjuangkan bisa menjadi kenyataan.
+          <br><br>
+
+          <b>
+            Welcome to 19, Adly! 🎉✨
+          </b>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    // Target ulang tahun:
+    // 22 Oktober 2026 pukul 00:00
+    const targetDate = new Date("October 22, 2026 00:00:00").getTime();
+
+
+    function updateCountdown() {
+
+      const now = new Date().getTime();
+
+      const distance = targetDate - now;
+
+
+      // Jika sudah tanggal 22 Oktober
+      if (distance <= 0) {
+
+        document.getElementById("countdown").style.display = "none";
+        document.querySelector(".message").style.display = "none";
+        document.getElementById("birthday").style.display = "block";
+
+        confetti();
+
+        return;
+      }
+
+
+      const days =
+        Math.floor(distance / (1000 * 60 * 60 * 24));
+
+      const hours =
+        Math.floor(
+          (distance % (1000 * 60 * 60 * 24))
+          / (1000 * 60 * 60)
+        );
+
+      const minutes =
+        Math.floor(
+          (distance % (1000 * 60 * 60))
+          / (1000 * 60)
+        );
+
+      const seconds =
+        Math.floor(
+          (distance % (1000 * 60))
+          / 1000
+        );
+
+
+      document.getElementById("days").innerHTML =
+        String(days).padStart(2, "0");
+
+      document.getElementById("hours").innerHTML =
+        String(hours).padStart(2, "0");
+
+      document.getElementById("minutes").innerHTML =
+        String(minutes).padStart(2, "0");
+
+      document.getElementById("seconds").innerHTML =
+        String(seconds).padStart(2, "0");
+    }
+
+
+    updateCountdown();
+
+    setInterval(updateCountdown, 1000);
+
+
+    // Efek hati
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.className = "heart";
+
+      const icons = ["💜","💖","💙","✨","🎈"];
+
+      heart.innerHTML =
+        icons[Math.floor(Math.random() * icons.length)];
+
+      heart.style.left =
+        Math.random() * 100 + "vw";
+
+      heart.style.animationDuration =
+        (Math.random() * 4 + 4) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 8000);
+    }
+
+    setInterval(createHeart, 700);
+
+
+    // Confetti saat hari ulang tahun
+    function confetti() {
+
+      for (let i = 0; i < 100; i++) {
+
+        const item = document.createElement("div");
+
+        item.innerHTML =
+          ["🎉","🎊","🎂","🎁","✨","💖"]
+          [Math.floor(Math.random() * 6)];
+
+        item.style.position = "fixed";
+        item.style.left = Math.random() * 100 + "vw";
+        item.style.top = "-30px";
+        item.style.fontSize =
+          (Math.random() * 20 + 15) + "px";
+
+        item.style.animation =
+          "fall " +
+          (Math.random() * 3 + 2) +
+          "s linear forwards";
+
+        item.style.zIndex = "999";
+
+        document.body.appendChild(item);
+
+        setTimeout(() => {
+          item.remove();
+        }, 6000);
+      }
+    }
+
+  </script>
+
+</body>
+</html>
